@@ -1,0 +1,22 @@
+{
+  "name": "angular-backend",
+  "version": "0.0.1",
+  "description": "Angular API for Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thruthesky/angular-backend.git"
+  },
+  "keywords": [
+    "angular-backend"
+  ],
+  "author": "JaeHo Song",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thruthesky/angular-backend/issues"
+  },
+  "homepage": "https://github.com/thruthesky/angular-backend#readme"
+}
