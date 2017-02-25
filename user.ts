@@ -56,11 +56,39 @@ export class User {
 
      * @endcode
      */
+    getUserData() {
+        if( this.logged == false) return;
+        let req:any = {};
+        req.mc = 'user.data';
+        req.session_id = this.base.getSessionId();
+        console.log(req);
+        return this.base.post( req )
+            .map( (res: any) => {
+                if ( this.base.isError( res ) ) return res;
+                return res;
+            });
+
+        // this.base.post( req,
+        //     (res) => {
+        //         success( res );
+        //     },
+        //     failure,
+        //     complete );
+    }
     register( req: USER_REGISTER_REQUEST_DATA ) {
         req.mc = 'user.create';
         return this.base.post( req )
             .map( (res: any) => {
-                //console.log("Hijacking ... register:", res );
+                if ( this.base.isError( res ) ) return res;
+                this.base.setSessionId( res );
+                return res;
+            });
+    }
+    update( req: USER_UPDATE_REQUEST_DATA ) {
+        req.mc = 'user.update';
+        req.session_id = this.base.getSessionId();
+        return this.base.post( req )
+            .map( (res: any) => {
                 if ( this.base.isError( res ) ) return res;
                 this.base.setSessionId( res );
                 return res;
