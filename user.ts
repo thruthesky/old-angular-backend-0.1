@@ -20,6 +20,14 @@ export class User {
     }
 
 
+
+
+    get logged() : boolean {
+        if ( this.base.getSessionId() ) return true;
+        else return false;
+    }
+
+
     /**
      * 
      * @code
@@ -50,10 +58,31 @@ export class User {
      */
     register( req: USER_REGISTER_REQUEST_DATA ) {
         req.mc = 'user.create';
-        return this.base.post( req );
+        return this.base.post( req )
+            .map( (res: any) => {
+                //console.log("Hijacking ... register:", res );
+                if ( this.base.isError( res ) ) return res;
+                this.base.setSessionId( res );
+                return res;
+            });
 
     }
 
 
+
+    logout() {
+
+
+        this.base.deleteSessionId( );
+
+        let req: USER_LOGOUT_REQUEST_DATA = {
+            mc: 'user.logout',
+            session_id: this.base.getSessionId()
+        };
+
+        this.base.post( req ).subscribe( res => {
+            console.log("logout success: ", res );
+        });
+    }
 
 }

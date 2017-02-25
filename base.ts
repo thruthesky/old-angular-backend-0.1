@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { URL_BACKEND_API, BACKEND_API_CONNECTION_TIMEOUT } from './config';
-import { RESPONSE } from './interface';
+import { RESPONSE, USER_LOGIN_REPONSE_DATA } from './interface';
 import * as d from './defines';
 import 'rxjs/add/operator/timeout';
 
@@ -23,6 +23,27 @@ export class Base {
         let options  = new RequestOptions({ headers: headers });
         return options;
     }
+
+
+
+
+    setSessionId( res: USER_LOGIN_REPONSE_DATA ) {
+      if ( res === void 0 || res.data === void 0 || res.data.session_id === void 0 ) {
+        alert("CRITICAL ERROR: sessionSessionId() - please report this to admin.");
+        return;
+      }
+      localStorage.setItem( d.KEY_SESSION_ID, res.data.session_id );
+    }
+
+    getSessionId() : string {
+        return localStorage.getItem( d.KEY_SESSION_ID );
+    }
+
+
+    deleteSessionId() {
+        localStorage.removeItem( d.KEY_SESSION_ID );
+    }
+
 
 
     /**
