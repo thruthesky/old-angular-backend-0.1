@@ -23,6 +23,9 @@ export interface USER_FIELDS {
     landline?: string;
     gender?: string;
     birthday?: string;
+    birth_day?: string;
+    birth_month?: string;
+    birth_year?: string;
     country?: string;
     province?: string;
     city?: string;
